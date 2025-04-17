@@ -7,15 +7,18 @@ import (
 
 func main() {
 	// Load IST timezone
-	location, err := time.LoadLocation("Asia/Kolkata")
+	istLocation, err := time.LoadLocation("Asia/Kolkata")
 	if err != nil {
-		fmt.Println("Error loading location:", err)
+		fmt.Println("Error loading IST location:", err)
 		return
 	}
 
-	// Get current time in IST
-	currentTime := time.Now().In(location)
+	// Get current time
+	now := time.Now()
 
-	// Print time
-	fmt.Println("Current time in IST:", currentTime.Format("2006-01-02 15:04:05 MST"))
+	// Format and print time in UTC
+	fmt.Println("Current time in UTC:", now.UTC().Format("2006-01-02 15:04:05 MST"))
+
+	// Format and print time in IST
+	fmt.Println("Current time in IST:", now.In(istLocation).Format("2006-01-02 15:04:05 MST"))
 }
